@@ -1,10 +1,8 @@
-# Circle Packing Problem - Evolutionary Computation
+# Enhanced evolutionary algorithm (Part 2).
 
-**Complete implementation with constructive heuristics (Part 1) and enhanced evolutionary algorithm (Part 2).**
+# Quick Start
 
-## Quick Start
-
-### Run Enhanced Algorithm
+# Run Enhanced Algorithm
 ```powershell
 pip install -r requirements.txt
 python packing_ea_enhanced.py
@@ -12,56 +10,56 @@ python packing_ea_enhanced.py
 
 ---
 
-## What's Included
+# What's Included
 
-### **packing_ea_enhanced.py** - Production Implementation
-- ✓ **Three placement heuristics**: Ordered, Random, Greedy
-- ✓ **Local relaxation**: Force-based overlap reduction (5-15% improvement)
-- ✓ **Enhanced candidates**: Adaptive angle sampling for better search
-- ✓ **Random restarts**: Multiple evolutionary runs escape local optima
-- ✓ **Multi-objective fitness**: Handles overlaps, bounds, weight, COM constraints
-- ✓ **Professional output**: Detailed progress and results
+# packing_ea_enhanced.py - Production Implementation
+- ✓ Three placement heuristics: Ordered, Random, Greedy
+- ✓ Local relaxation: Force-based overlap reduction (5-15% improvement)
+- ✓ Enhanced candidates: Adaptive angle sampling for better search
+- ✓ Random restarts: Multiple evolutionary runs escape local optima
+- ✓ Multi-objective fitness: Handles overlaps, bounds, weight, COM constraints
+- ✓ Professional output: Detailed progress and results
 
-**Features:**
+Features:
 - 420+ lines of clean, documented code
 - O(n³) constructive heuristics
 - Full support for rectangular containers
 - Weight and center-of-mass constraints
 - Deterministic reproducible results
 
-### 2. **best_packing_enhanced.png** - Solution Visualization
+# 2. best_packing_enhanced.png - Solution Visualization
 
 ---
 
-## Problem Overview
+# Problem Overview
 
-**Goal**: Place N circles without overlap, minimizing container radius.
+Goal: Place N circles without overlap, minimizing container radius.
 
-**Constraints:**
+Constraints:
 - No circle overlap: $\sqrt{(x_i-x_j)^2 + (y_i-y_j)^2} \geq r_i + r_j$
 - Rectangular bounds: $|x_i| + r_i \leq W/2$, $|y_i| + r_i \leq D/2$
 - Weight limit: $\sum w_i \leq W_{max}$
 - Center-of-mass: Balanced distribution
 
-**Complexity**: NP-hard (no known polynomial algorithm guarantees optimality)
+Complexity: NP-hard (no known polynomial algorithm guarantees optimality)
 
 ---
 
-## Methods Comparison
+# Methods Comparison
 
 | Method | Quality | Speed | Consistency | Best For |
 |--------|---------|-------|-------------|----------|
-| **Ordered** | ★★☆☆☆ | Very Fast | Very High | Baseline comparison |
-| **Random** | ★★★☆☆ | Very Fast | Low | Exploring diversity |
-| **Greedy** | ★★★★☆ | Very Fast | Very High | **Best single solution** |
+| Ordered | ★★☆☆☆ | Very Fast | Very High | Baseline comparison |
+| Random | ★★★☆☆ | Very Fast | Low | Exploring diversity |
+| Greedy | ★★★★☆ | Very Fast | Very High | Best single solution |
 
-**Recommendation**: Use **Greedy** for production quality.
+Recommendation: Use "Greedy" for production quality.
 
 ---
 
-## Results
+# Results
 
-### Test Problem (8 mixed-size circles)
+# Test Problem (8 mixed-size circles)
 ```
 Constructive Heuristics:
   Greedy:  Container radius = 135.2  ← BEST
@@ -77,30 +75,30 @@ Enhanced EA (3 restarts, 150 generations each):
 
 ---
 
-## Key Implementation Details
+# Key Implementation Details
 
-### Local Relaxation
+# Local Relaxation
 ```python
 # Force-based approach reduces overlaps
 # Pushes circles apart while preserving tangencies
 # ~50 iterations, converges in <100ms
 ```
 
-### Enhanced Candidate Generation
+# Enhanced Candidate Generation
 ```python
 # 48 angle samples (vs 36 in baseline)
 # Adaptive sampling around placed circles
 # Covers more placement space
 ```
 
-### Random Restarts
+# Random Restarts
 ```python
 # 3 independent EA runs
 # Tracks best solution globally
 # 3-5% fitness improvement typical
 ```
 
-### Multi-Objective Fitness
+# Multi-Objective Fitness
 ```python
 fitness = 1000×overlap + 500×oob + 50×com_penalty + 100×weight_penalty
 # Balances multiple constraints simultaneously
@@ -108,7 +106,7 @@ fitness = 1000×overlap + 500×oob + 50×com_penalty + 100×weight_penalty
 
 ---
 
-## File Structure
+# File Structure
 
 ```
 .
@@ -120,9 +118,9 @@ fitness = 1000×overlap + 500×oob + 50×com_penalty + 100×weight_penalty
 
 ---
 
-## How to Use
+# How to Use
 
-### 1. Basic Placement
+# 1. Basic Placement
 ```python
 from packing_ea_enhanced import Bunch
 
@@ -138,7 +136,7 @@ bunch.greedy_place()     # Best single-run quality
 bunch.draw(title="Placement Result", save_path="output.png")
 ```
 
-### 2. Run Evolutionary Algorithm
+# 2. Run Evolutionary Algorithm
 ```python
 from packing_ea_enhanced import PackingEA
 
@@ -154,38 +152,23 @@ best_bunch.draw(title=f"Best Solution (Fitness={best_fitness:.0f})",
                 save_path="best_solution.png")
 ```
 
-### 3. Analyze & Compare
+# 3. Analyze & Compare
 ```
 Run the Python script directly to see:
-- All three methods compared
-- Statistics and metrics
-- Best solution visualization
+ All three methods compared
+ Statistics and metrics
+ Best solution visualization
 ```
+---
+# Performance
+
+ Constructive heuristics: O(n³) - milliseconds for 8-20 circles
+ Local relaxation: O(50·n²) - <100ms typical
+ EA (150 gen, 30 pop, 3 restarts): ~30 seconds for 8 circles
+ Memory: O(n) for all methods
 
 ---
-
-## Performance
-
-- **Constructive heuristics**: O(n³) - milliseconds for 8-20 circles
-- **Local relaxation**: O(50·n²) - <100ms typical
-- **EA (150 gen, 30 pop, 3 restarts)**: ~30 seconds for 8 circles
-- **Memory**: O(n) for all methods
-
----
-
-## Quality for 90+ Marks
-
-✓ **Theory**: Mathematical foundations with complexity analysis  
-✓ **Implementation**: Three heuristics + enhancements  
-✓ **Experiments**: Multiple instances, multiple runs, statistics  
-✓ **Analysis**: Comprehensive comparison with visualizations  
-✓ **Code**: Clean, documented, production-quality  
-✓ **Documentation**: Professional README + full notebook  
-✓ **Results**: Quantitative metrics and recommendations  
-
----
-
-## Requirements
+# Requirements
 
 - Python 3.7+
 - numpy
@@ -194,6 +177,4 @@ Run the Python script directly to see:
 
 Install: `pip install -r requirements.txt`
 
----
 
-**Status**: ✓ Production Ready | **Grade Target**: 90-100 | **Last Updated**: 2025-11-17
